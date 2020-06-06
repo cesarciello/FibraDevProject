@@ -45,8 +45,8 @@
 
         <ng-container matColumnDef="delete">
           <mat-header-cell style="flex: 0.3" *matHeaderCellDef> Excluir </mat-header-cell>
-          <mat-cell style="flex: 0.3" (click)="deleteClient(element.id)" *matCellDef="let element">
-            <p class="icon">
+          <mat-cell style="flex: 0.3" *matCellDef="let element">
+            <p class="icon" (click)="deleteClient(element.id)">
               <mat-icon>delete</mat-icon>
             </p>
           </mat-cell>
