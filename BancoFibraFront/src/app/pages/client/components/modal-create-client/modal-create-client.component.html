@@ -5,7 +5,8 @@
   </ng-template>
   <form [formGroup]="client">
     <app-input-text title="Nome" controlName="name" [formGroup]="client"></app-input-text>
-    <app-input-text title="CNPJ" controlName="cnpj" [formGroup]="client"></app-input-text>
+    <app-input-text title="CNPJ" placeholder="Ex: 00.000.000/0000-00" controlName="cnpj" [formGroup]="client">
+    </app-input-text>
     <app-input-date title="Data" controlName="date" [formGroup]="client"></app-input-date>
   </form>
 

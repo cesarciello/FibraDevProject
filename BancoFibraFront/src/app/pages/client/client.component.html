@@ -10,7 +10,7 @@
       <div class="field">
         <mat-form-field>
           <mat-label>CNPJ</mat-label>
-          <input [(ngModel)]="filterPage.cnpj" matInput>
+          <input [(ngModel)]="filterPage.cnpj" placeholder="Ex: 00.000.000/0000-00" matInput>
         </mat-form-field>
       </div>
       <button mat-flat-button color="primary" (click)="filterByNameCnpj()">Filtrar</button>

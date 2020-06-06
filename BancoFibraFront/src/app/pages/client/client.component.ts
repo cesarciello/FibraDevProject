@@ -95,7 +95,7 @@ export class ClientComponent implements OnInit {
 
   private setDataSource(): void {
     this.isCanViewTable = 'load';
-    this.getClients().subscribe(
+    this.clientService.getClients().subscribe(
       (response) => {
         this.dataSource.data = response.data;
         this.isCanViewTable = 'succ';
@@ -106,10 +106,6 @@ export class ClientComponent implements OnInit {
     );
   }
 
-  private getClients(): Observable<ApiResponse<Client[]>> {
-    return this.clientService.getClients();
-  }
-  
   private openSnackBar(text: string, icon: string): void {
     this.snackBar.openFromComponent(SnackbarComponent, {
       duration: 3000,

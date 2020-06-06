@@ -25,6 +25,7 @@ export class ClientService {
 
   public createClient(client: Client) {
     try {
+      client = this.editFields(client);
       return this.apiService.createClient(client) as Observable<ApiResponse<Client>>
     } catch(error) {
       throw error;
@@ -33,6 +34,7 @@ export class ClientService {
 
   public updateClient(clientToUpdate: Client) {
     try {
+      clientToUpdate = this.editFields(clientToUpdate);
       return this.apiService.updateClient(clientToUpdate) as Observable<ApiResponse<Client>>
     } catch (error) {
       throw error;
@@ -49,9 +51,16 @@ export class ClientService {
 
   public getByNameCnpj(filter: FilterNameCnpj) {
     try {
+      filter = this.editFields(filter);
       return this.apiService.getByNameCnpj(filter) as Observable<ApiResponse<Client[]>>
     } catch (error) {
       throw error;
     }
   }
+
+  private editFields(client) {
+    client.cnpj = client.cnpj.replace(/[^\d]+/g, '');
+    return client;
+  }
+
 }

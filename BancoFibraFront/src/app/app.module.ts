@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
 import { AppComponent } from './app.component';
 import { ApiService } from './services/api/api.service';
 import { ClientService } from './services/client/client.service';
@@ -15,6 +17,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ClientModule } from './pages/client/client.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { ModalCreateClientComponent } from './pages/client/components/modal-create-client/modal-create-client.component';
+
+const maskConfig: Partial<IConfig> = {
+  validation: true,
+};
 
 @NgModule({
   entryComponents: [
@@ -26,6 +32,7 @@ import { ModalCreateClientComponent } from './pages/client/components/modal-crea
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    NgxMaskModule.forRoot(maskConfig),
     HttpClientModule,
     LayoutModule,
     MaterialModule,
@@ -33,7 +40,7 @@ import { ModalCreateClientComponent } from './pages/client/components/modal-crea
     ReactiveFormsModule,
     FormsModule,
     ClientModule,
-    SharedComponentsModule
+    SharedComponentsModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt' },

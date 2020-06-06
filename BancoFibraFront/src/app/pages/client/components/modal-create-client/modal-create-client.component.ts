@@ -70,7 +70,6 @@ export class ModalCreateClientComponent implements OnInit {
       this.openSnackBar(validation.error, 'close');
       return;
     }
-
     this.clientService.createClient(client).subscribe(
       (response) => {
         this.openSnackBar('Cadastro efetuado com sucesso', 'check');
@@ -84,13 +83,11 @@ export class ModalCreateClientComponent implements OnInit {
   }
 
   private editClient(client: Client) {
-    
     const validation = this.validationClientService.validateToUpdate(client);
     if(!validation.status) {
       this.openSnackBar(validation.error, 'close');
       return;
     }
-
     this.clientService.updateClient(client).subscribe((response) => {
       this.openSnackBar('Alteração efetuada com sucesso', 'check');
       this.dialogRef.close(true);
