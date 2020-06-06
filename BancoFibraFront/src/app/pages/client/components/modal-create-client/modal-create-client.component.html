@@ -1,0 +1,16 @@
+<main id="ModalCreateClient">
+  <h1 mat-dialog-title *ngIf="data.type === 'create'; else titleEdit">Cadastro</h1>
+  <ng-template #titleEdit>
+    <h1 mat-dialog-title>Alteração</h1>
+  </ng-template>
+  <form [formGroup]="client">
+    <app-input-text title="Nome" controlName="name" [formGroup]="client"></app-input-text>
+    <app-input-text title="CNPJ" controlName="cnpj" [formGroup]="client"></app-input-text>
+    <app-input-date title="Data" controlName="date" [formGroup]="client"></app-input-date>
+  </form>
+
+  <div mat-dialog-actions>
+    <button mat-button color="primary" (click)="saveClient()">Salvar</button>
+    <button mat-button [mat-dialog-close]="false">Fechar</button>
+  </div>
+</main>

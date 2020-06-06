@@ -1,0 +1,88 @@
+<section id="Clients">
+  <mat-card>
+    <div class="filters">
+      <div class="field">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input [(ngModel)]="filterPage.name" matInput>
+        </mat-form-field>
+      </div>
+      <div class="field">
+        <mat-form-field>
+          <mat-label>CNPJ</mat-label>
+          <input [(ngModel)]="filterPage.cnpj" matInput>
+        </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary" (click)="filterByNameCnpj()">Filtrar</button>
+      <button mat-flat-button class="clean" (click)="cleanFilters()">Limpar Filtros</button>
+    </div>
+
+    <ng-container>
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cnpj">
+          <mat-header-cell *matHeaderCellDef> CNPJ </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.cnpj | CNPJPipe }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell style="flex: 0.3" *matHeaderCellDef> Editar </mat-header-cell>
+          <mat-cell style="flex: 0.3" (click)="openModalCreateClient('edit', element)" *matCellDef="let element">
+            <p class="icon">
+              <mat-icon>edit</mat-icon>
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell style="flex: 0.3" *matHeaderCellDef> Excluir </mat-header-cell>
+          <mat-cell style="flex: 0.3" (click)="deleteClient(element.id)" *matCellDef="let element">
+            <p class="icon">
+              <mat-icon>delete</mat-icon>
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="include">
+          <mat-header-cell style="flex: 0.3" *matHeaderCellDef> Incluir </mat-header-cell>
+          <mat-cell style="flex: 0.3" (click)="openModalCreateClient('create', element)" *matCellDef="let element">
+            <p class="icon">
+              <mat-icon>add_circle</mat-icon>
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <div class="paginator" [hidden]="isCanViewTable !== 'succ'">
+        <mat-paginator [pageSizeOptions]="[7, 10, 15]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isCanViewTable === 'load'">
+      <section class="load">
+        <mat-spinner></mat-spinner>
+      </section>
+    </ng-container>
+
+    <ng-container *ngIf="isCanViewTable === 'error'">
+      <div class="error">
+        <p class="icon">
+          <mat-icon>access_time</mat-icon>
+        </p>
+        <p>Serviço indisponível no momento, tente novamente!</p>
+      </div>
+    </ng-container>
+  </mat-card>
+</section>
